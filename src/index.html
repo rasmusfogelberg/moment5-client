@@ -1,72 +1,57 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
     <title>Rafo Portfolio | Start</title>
     <link href="css/main.css" rel="stylesheet" type="text/css" />
   </head>
   <body class="default">
-    <header class="header">
-      <nav class="navbar">
-        <a class="nav-logo" href="#">F</a>
-        <ul class="nav-menu">
-          <li class="nav-item">
-            <a class="nav-link" href="https://fogelcode.com">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Work</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Blog</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">About me</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Contact me</a>
-          </li>
-        </ul>
-        <!-- Burger menu holder, only visible on mobile -->
-        <div class="burgeru">
-          <span class="line"></span>
-          <span class="line"></span>
-          <span class="line"></span>
-        </div>
-      </nav>
-    </header>
+    <header class="header"></header>
     <main class="content">
-      <div class="single">
-        <section class="ingress">
-          <strong>Hello there, my name is Rasmus</strong>
-          <h1>I'm a fledgling web developer</h1>
-          <p>I love working with the web, and playing Valheim on my down-time.</p>
-        </section>
-
-        <section class="work">
-          <h2>What I'm working on</h2>
-          <article class="project">
-            <div class="description">
-              <h3>Bakery</h3>
-              <p>This is the text that gives a short description to pull the user in</p>
-              <p>And this is the longer one that provides a more detailed background to the project, what was used and how it was done etc.</p>
-              <a href="#">View the project</a>
-            </div>
-            <img src="images/image1.jpg" />
-          </article>
-          <article class="project">
-            <div class="description">
-              <h3>Another thing</h3>
-              <p>This is the text that gives a short description to pull the user in</p>
-              <p>And this is the longer one that provides a more detailed background to the project, what was used and how it was done etc.</p>
-              <a href="#">View the project</a>
-            </div>
-            <img src="images/image2.jpg" />
-          </article>
-        </section>
-      </div>
+      <section class="courses">
+        <article>
+          <h2>List</h2>
+          <ul id="course-list"></ul>
+        </article>
+        <article id="course-form">
+          <h2>Submit form</h2>
+          <form>
+            <label for="code">Code:</label><br />
+            <input
+              type="text"
+              name="course-code"
+              id="course-code"
+            /><br />
+            <label for="name">Name:</label><br />
+            <input
+              type="text"
+              name="course-name"
+              id="course-name"
+            /><br />
+            <label for="progression">Progression:</label><br />
+            <input
+              type="text"
+              name="course-progression"
+              id="course-progression"
+            /><br />
+            <label for="syllabus">Course Syllabus:</label><br />
+            <input
+              type="text"
+              name="course-syllabus"
+              id="course-syllabus"
+            /><br />
+            <input type="submit" value="Add Course" id="add-Course">
+          </form>
+        </article>
+      </section>
       <footer>
-        <span>Created with ❤ in Kristianstad</span>
+        <iframe
+          src="https://julafton.se/nedrakning-till-julafton.php"
+          width="180"
+          height="200"
+          frameborder="0"
+        ></iframe>
       </footer>
     </main>
     <script src="js/script.js"></script>
