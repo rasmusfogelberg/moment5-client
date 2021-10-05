@@ -7,6 +7,11 @@ const apiBaseURL = `http://api.fogelcode.com/moment5/api`;
 const courseForm = document.querySelector("#course-form");
 
 // Functions
+
+/** 
+ * List all courses in database
+ *
+ */
 const getCourses = () => {
   courseListEl.innerHTML = "";
   deleteCourseButtons = document.querySelectorAll(".delete-course");
@@ -16,30 +21,39 @@ const getCourses = () => {
     .then((data) => {
       data.forEach((course) => {
         courseListEl.innerHTML += `
-        <li><strong>Code:</strong> ${course.code}</li>
-        <li><strong>Name:</strong> ${course.name}</li>
-        <li><strong>Progression:</strong> ${course.progression}</li>
-        <li><strong><a href="${course.course_syllabus}" title="${course.course_syllabus}">Course Syllabus</a></strong></li>
-        <button class="delete-course" data-id="${course.id}">Delete</button>
-        `;
+        <ul>
+          <li><strong>Code:</strong></li>
+          <li>${course.code}</li>
+          <li><strong>Name:</strong></li>
+          <li>${course.name}</li>
+          <li><strong>Progression:</strong> ${course.progression}</li>
+          <li><strong><a href="${course.course_syllabus}" title="${course.course_syllabus}">Course Syllabus</a></strong></li>
+          <button class="delete-course" data-id="${course.id}">Delete</button>
+        </ul>`;
       });
-    });
-  // TODO: Awlays handle error!
+    })
+    .catch((error) => console.log(`Error: ${error}`));
 };
 
+/** 
+ * Delete a course
+ *
+ */
+
 const deleteCourse = (id) => {
-  console.log("HELLO", id);
-  fetch(`${apiBaseURL}/delete.php?id=${id}`, {
-    headers: {
-      "Content-Type": "application/json; charset=UTF-8",
-    },
+  fetch(`${apiBaseURL}/delete.php`, {
+    method: "DELETE",
+    body: JSON.stringify({ id }),
   })
     .then((response) => response.json())
-    .catch((error) => {
-      console.log(`Error: ${error}`);
-    })
-    .finally(getCourses());
+    .then(() => getCourses())
+    .catch((error) => console.log(`Error: ${error}`));
 };
+
+/** 
+ * Add a course
+ *
+ */
 
 const addCourse = (course) => {
   fetch(`${apiBaseURL}/create.php`, {
@@ -55,11 +69,6 @@ const addCourse = (course) => {
     });
 };
 
-/**
- * TODO: Solve this so I can have event listeners first
- * If the event listeners is before the functions I get error message:
- * "Uncaught ReferenceError: Cannot access 'getCourses' before initialization"
- **/
 
 // Event listeners
 window.addEventListener("load", getCourses);
@@ -71,7 +80,6 @@ courseForm.addEventListener("submit", (event) => {
   new FormData(courseForm);
 });
 
-//
 courseForm.addEventListener("formdata", (event) => {
   const data = event.formData; // FormData-> .get()
   const course = {};
@@ -84,10 +92,13 @@ courseForm.addEventListener("formdata", (event) => {
    **/
   for (let key of data.keys()) {
     // Example of why this is needed:
-    // Name attribute is "course-code" we need to
-    // remove "course-", as API only accepts "code"
+    // Name attribute is "course-code". "course-code"  
+    // needs to be removed, as API only accepts "code"
     let keyWithoutPrefix = key.replace("course-", "");
 
+    // If a key has the string "syllabus" in it,
+    // it will remake it to be "course_syllabus" since
+    // this is what is used in the database
     if (keyWithoutPrefix === "syllabus") {
       keyWithoutPrefix = `course_syllabus`;
     }

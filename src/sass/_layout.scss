@@ -93,133 +93,64 @@ a:hover {
   color: #edeeee;
 }
 
-#course-list {
-  button {
-    margin-bottom: 40px;
-  }
-}
-
-/* Layout */
-.content {
-  height: 100%;
-  margin-top: auto;
-}
-
-/** Single item **/
-.single {
-  margin: 0 auto;
-  max-width: 1335px;
-  position: relative;
-  width: 100%;
-  padding: 0 2rem;
-}
-
-/** Ingress **/
-.ingress {
-  margin-top: 12%;
-}
-
-.ingress h1 {
-  padding: 0;
-  text-transform: inherit;
-  line-height: 140%;
-  margin: 2rem 0;
-  max-width: 70%;
-  font-size: 5.5rem;
-}
-
-.ingress p {
-  padding: 0;
-  margin: 0;
-  line-height: 150%;
-  font-size: 2.5rem;
-  max-width: 80%;
-}
-
-.ingress strong {
-  font-size: 3.5rem;
-}
-
-.ingress a {
-  font-weight: 700;
+button {
+  color: rgba(255, 255, 255, 0.87);
   text-decoration: none;
+  transition: 0.3s color;
+  border: 2px solid #edeeee;
+  background-color: #003fff;
+  cursor: pointer;
 }
 
-/** Work **/
-.work {
-  margin-top: 12%;
+button:hover {
+  color: #003fff;
+  background-color: #edeeee;
+}
 
-  h2 {
-    padding: 0;
-    margin: 0 0 4rem;
-    font-size: 2.4rem;
-  }
+section.courses {
+  margin: 0 30px;
 
-  .project {
-    display: flex;
-    margin: 0 0 8rem;
+  article {
+    display: grid;
+    justify-items: center;
+    margin: 60px 0;
 
-    .description {
-      padding-right: 8rem;
+    div#course-list {
+      justify-self: center;
+      margin: 0 auto;
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
 
-      a {
-        @include link(true);
-        color: #edeeee;
-        display: inline-flex;
-        margin-top: 1.5rem;
-        padding: 1rem 1.5rem;
+      ul {
+        min-width: 200px;
+        padding: 10px;
+        border: 2px solid #edeeee;
 
-        &:hover {
-          background-color: #edeeee;
-          color: #003fff;
+        li:nth-child(1) {
+          line-height: 0.8;
+        }
+
+        li:nth-child(3) {
+          line-height: 0.8;
+          margin-top: 5px;
         }
       }
-    }
 
-    img {
-      border-radius: 15px;
+
     }
   }
 }
 
-@media only screen and (min-width: 1024px) {
-  .work .project img {
-    width: 600px;
-  }
+form#course-form {
+  display: grid;
 
-  .work .project .details {
-    padding-right: 8rem;
-  }
+:last-child {
+  margin-top: 30px;
+}  
 }
 
-@media only screen and (max-width: 1240px) {
-  .work .project img {
-    height: 325px;
-    width: 400px;
-  }
-}
-
-@media only screen and (max-width: 930px) {
-  .work .project {
-    flex-direction: column-reverse;
-  }
-
-  .work .project .details {
-    padding: 0;
-  }
-
-  .work .project img {
-    margin-bottom: 4rem;
-    height: auto;
-    width: 100%;
-  }
-}
-
-@media only screen and (max-width: 500px) {
-  .ingress h1 {
-    max-width: 100%;
-  }
-  .ingress p {
-    max-width: 100%;
-  }
+main {
+  max-width: 960px;
+  margin: 0 auto;
 }
