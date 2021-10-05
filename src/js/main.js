@@ -27,7 +27,7 @@ const getCourses = () => {
           <li><strong>Name:</strong></li>
           <li>${course.name}</li>
           <li><strong>Progression:</strong> ${course.progression}</li>
-          <li><strong><a href="${course.course_syllabus}" title="${course.course_syllabus}">Course Syllabus</a></strong></li>
+          <li><strong><a href="${course.course_syllabus}" title="${course.course_syllabus}" target="_blank">Course Syllabus</a></strong></li>
           <button class="delete-course" data-id="${course.id}">Delete</button>
         </ul>`;
       });
@@ -63,6 +63,8 @@ const addCourse = (course) => {
     .then((response) => response.json())
     .then((data) => {
       getCourses();
+      // Clears form when getting all the courses in the database
+      document.querySelector("#course-form").reset();
     })
     .catch((error) => {
       console.log(`Error: ${error}`);
@@ -75,6 +77,7 @@ window.addEventListener("load", getCourses);
 
 // Prevent reload when submitting the form
 courseForm.addEventListener("submit", (event) => {
+
   event.preventDefault();
   // Construct a FormData object based on the inputs that live inside the form
   new FormData(courseForm);

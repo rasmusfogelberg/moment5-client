@@ -40,6 +40,7 @@ body {
 
 h1 {
   @extend %heading-default;
+  margin-top: 20px;
 }
 
 h2 {
@@ -113,16 +114,20 @@ section.courses {
   article {
     display: grid;
     justify-items: center;
-    margin: 60px 0;
+    margin: 70px 0;
 
+    h2 {
+      margin-bottom: 30px;
+    }
     div#course-list {
       justify-self: center;
       margin: 0 auto;
       width: 100%;
-      display: flex;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
 
       ul {
+        display: grid;
         min-width: 200px;
         padding: 10px;
         border: 2px solid #edeeee;
@@ -135,9 +140,10 @@ section.courses {
           line-height: 0.8;
           margin-top: 5px;
         }
+        :last-child {
+          justify-self: flex-end;
+        }
       }
-
-
     }
   }
 }
@@ -145,12 +151,38 @@ section.courses {
 form#course-form {
   display: grid;
 
-:last-child {
-  margin-top: 30px;
-}  
+  :last-child {
+    margin-top: 30px;
+  }
 }
 
 main {
   max-width: 960px;
   margin: 0 auto;
+}
+
+@media only screen and (max-width: 670px) {
+  h1 {
+    font-size: 2.6rem;
+  }
+  h2 {
+    font-size: 1.8rem;
+  }
+}
+
+@media only screen and (max-width: 540px) {
+  h1 {
+    font-size: 2rem;
+  }
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  section.courses {
+    article {
+      div#course-list {
+        grid-template-columns: 1fr;
+      }
+    }
+  }
 }
