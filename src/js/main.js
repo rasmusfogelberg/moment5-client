@@ -3,12 +3,12 @@ let courseListEl = document.querySelector("#course-list");
 let addCoursebtn = document.querySelector("#add-course");
 let deleteCourseButtons;
 
-const apiBaseURL = `http://api.fogelcode.com/moment5/api`;
+const apiBaseURL = `http://api.fogelcode.com/api`;
 const courseForm = document.querySelector("#course-form");
 
 // Functions
 
-/** 
+/**
  * List all courses in database
  *
  */
@@ -32,14 +32,13 @@ const getCourses = () => {
         </ul>`;
       });
     })
-    .catch((error) => console.log(`Error: ${error}`));
+    .catch((error) => console.error(`Error: ${error}`));
 };
 
-/** 
+/**
  * Delete a course
  *
  */
-
 const deleteCourse = (id) => {
   fetch(`${apiBaseURL}/delete.php`, {
     method: "DELETE",
@@ -47,14 +46,13 @@ const deleteCourse = (id) => {
   })
     .then((response) => response.json())
     .then(() => getCourses())
-    .catch((error) => console.log(`Error: ${error}`));
+    .catch((error) => console.error(`Error: ${error}`));
 };
 
-/** 
+/**
  * Add a course
  *
  */
-
 const addCourse = (course) => {
   fetch(`${apiBaseURL}/create.php`, {
     method: "POST",
@@ -66,25 +64,21 @@ const addCourse = (course) => {
       // Clears form when getting all the courses in the database
       document.querySelector("#course-form").reset();
     })
-    .catch((error) => {
-      console.log(`Error: ${error}`);
-    });
+    .catch((error) => console.error(`Error: ${error}`));
 };
-
 
 // Event listeners
 window.addEventListener("load", getCourses);
 
 // Prevent reload when submitting the form
 courseForm.addEventListener("submit", (event) => {
-
   event.preventDefault();
   // Construct a FormData object based on the inputs that live inside the form
   new FormData(courseForm);
 });
 
 courseForm.addEventListener("formdata", (event) => {
-  const data = event.formData; // FormData-> .get()
+  const data = event.formData;
   const course = {};
 
   /**
@@ -92,16 +86,20 @@ courseForm.addEventListener("formdata", (event) => {
    * of all the keys inside the formData.
    * This will get their values from the
    * fields that live inside the form.
-   **/
+   */
   for (let key of data.keys()) {
-    // Example of why this is needed:
-    // Name attribute is "course-code". "course-code"  
-    // needs to be removed, as API only accepts "code"
+    /**
+     * Example of why this is needed:
+     * Name attribute is "course-code". "course-code"
+     * needs to be removed, as API only accepts "code"
+     */
     let keyWithoutPrefix = key.replace("course-", "");
 
-    // If a key has the string "syllabus" in it,
-    // it will remake it to be "course_syllabus" since
-    // this is what is used in the database
+    /**
+     * If a key has the string "syllabus" in it,
+     * it will remake it to be "course_syllabus" since
+     * this is what is used in the database
+     */
     if (keyWithoutPrefix === "syllabus") {
       keyWithoutPrefix = `course_syllabus`;
     }
@@ -114,7 +112,6 @@ courseForm.addEventListener("formdata", (event) => {
 
 document.body.addEventListener("click", (event) => {
   if (event.target.classList.contains("delete-course")) {
-    console.log("Clicked a delete button!", event.target);
     deleteCourse(event.target.dataset.id);
   }
 });
