@@ -3,7 +3,7 @@ let courseListEl = document.querySelector("#course-list");
 let addCoursebtn = document.querySelector("#add-course");
 let deleteCourseButtons;
 
-const apiBaseURL = `http://api.fogelcode.com/api`;
+const apiBaseURL = `https://api.fogelcode.com/api`;
 const courseForm = document.querySelector("#course-form");
 
 // Functions
